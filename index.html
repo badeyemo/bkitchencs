@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bike's Kitchen — Catering for Every Occasion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221219;
+    --cream:#FAF2E4;
+    --cream-2:#F3E8D4;
+    --card:#FFFCF6;
+    --paprika:#B5391F;
+    --paprika-dark:#8C2A16;
+    --gold:#D9A441;
+    --gold-dark:#B9832A;
+    --green:#33503F;
+    --line: rgba(34,18,25,0.12);
+    --shadow: 0 18px 40px -20px rgba(34,18,25,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;line-height:1.05;font-weight:600;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--paprika);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:3px solid var(--gold-dark);outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,242,228,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;}
+  .logo-mark{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--paprika);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cream);font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;
+    box-shadow: inset 0 0 0 3px rgba(250,242,228,0.35);
+  }
+  .navlinks{display:flex;gap:30px;font-size:.94rem;font-weight:500;}
+  .navlinks a{position:relative;padding:4px 0;}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:0;background:var(--paprika);transition:width .25s ease;}
+  .navlinks a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 26px;border-radius:999px;font-weight:700;font-size:.9rem;
+    cursor:pointer;border:1px solid transparent;letter-spacing:.01em;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--paprika);color:var(--cream);box-shadow:var(--shadow);}
+  .btn-primary:hover{background:var(--paprika-dark);}
+  .btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream);}
+  .btn-line{background:transparent;color:var(--paprika);padding:0;border:none;text-decoration:underline;text-underline-offset:4px;}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;}
+
+  @media(max-width:900px){
+    .navlinks{display:none;}
+    .nav-cta .btn-ghost{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:90px 0 60px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;
+  }
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:56px;}}
+  .hero h1{font-size:clamp(2.6rem, 5vw, 4.2rem);}
+  .hero h1 em{font-style:italic;color:var(--paprika);font-weight:500;}
+  .hero p.lede{font-size:1.12rem;line-height:1.6;color:rgba(34,18,25,0.72);max-width:46ch;margin:22px 0 34px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:38px;}
+  .hero-meta{display:flex;gap:34px;flex-wrap:wrap;}
+  .hero-meta div{font-family:'Space Mono',monospace;}
+  .hero-meta .num{font-size:1.5rem;font-weight:700;color:var(--paprika);display:block;}
+  .hero-meta .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(34,18,25,0.55);}
+
+  /* hero art: layered plate illustration + stamp badge, all vector/CSS, no stock photos */
+  .hero-art{position:relative;height:480px;}
+  @media(max-width:900px){.hero-art{height:360px;}}
+  .plate{
+    position:absolute;inset:0;margin:auto;width:380px;height:380px;border-radius:50%;
+    background:
+      radial-gradient(circle at 34% 30%, rgba(255,255,255,0.5), transparent 45%),
+      conic-gradient(from 210deg, #C8451F, #E0722F, #D9A441, #33503F, #B5391F, #C8451F);
+    box-shadow: var(--shadow), inset 0 0 0 14px var(--cream), inset 0 0 0 16px rgba(34,18,25,0.15);
+  }
+  @media(max-width:900px){.plate{width:300px;height:300px;}}
+  .steam{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:150px;height:140px;opacity:.9;}
+  .steam path{stroke:rgba(34,18,25,0.28);stroke-width:3;fill:none;stroke-linecap:round;}
+  .badge{
+    position:absolute;top:6%;right:-4%;
+    width:132px;height:132px;border-radius:50%;
+    background:var(--ink);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.05em;
+    box-shadow:var(--shadow);
+    animation:spin 22s linear infinite;
+  }
+  .badge .badge-inner{width:88%;height:88%;border-radius:50%;border:1px dashed rgba(250,242,228,0.5);display:flex;align-items:center;justify-content:center;padding:10px;animation:spin-rev 22s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes spin-rev{to{transform:rotate(-360deg);}}
+  .ticket{
+    position:absolute;bottom:2%;left:-6%;
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:16px 20px;box-shadow:var(--shadow);
+    font-family:'Space Mono',monospace;font-size:.78rem;
+    width:200px;
+  }
+  .ticket .t-head{display:flex;justify-content:space-between;font-weight:700;border-bottom:1px dashed var(--line);padding-bottom:8px;margin-bottom:8px;}
+  .ticket .t-row{display:flex;justify-content:space-between;color:rgba(34,18,25,0.65);padding:2px 0;}
+  @media(max-width:640px){.badge{width:104px;height:104px;font-size:.6rem;right:0;} .ticket{width:168px;padding:12px 14px;font-size:.7rem;}}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--ink);color:var(--cream);
+    overflow:hidden;white-space:nowrap;padding:16px 0;
+    border-top:1px solid rgba(250,242,228,0.15);
+    border-bottom:1px solid rgba(250,242,228,0.15);
+  }
+  .marquee-track{display:inline-flex;gap:0;animation:scroll 32s linear infinite;}
+  .marquee-track span{
+    font-family:'Space Mono',monospace;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+    padding:0 28px;display:inline-flex;align-items:center;gap:28px;color:rgba(250,242,228,0.85);
+  }
+  .marquee-track span::after{content:"◆";color:var(--gold);font-size:.6rem;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;}
+  @media(max-width:640px){section{padding:64px 0;}}
+  .sec-head{max-width:640px;margin-bottom:54px;}
+  .sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:10px;}
+  .sec-head p{color:rgba(34,18,25,0.66);font-size:1.05rem;margin-top:14px;line-height:1.6;}
+
+  /* ---------- SERVICES (menu-card / torn edge) ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  @media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.services-grid{grid-template-columns:1fr;}}
+  .svc-card{
+    background:var(--card);border:1px solid var(--line);border-radius:4px 4px 14px 14px;
+    padding:30px 26px 26px;position:relative;
+    box-shadow:0 10px 24px -18px rgba(34,18,25,0.4);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .svc-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:10px;
+    background-image: radial-gradient(circle, var(--cream) 5px, transparent 5.5px);
+    background-size:20px 20px;background-position:center -4px;background-repeat:repeat-x;
+  }
+  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .svc-icon{width:46px;height:46px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .svc-icon svg{width:22px;height:22px;stroke:var(--paprika);}
+  .svc-card h3{font-size:1.2rem;margin-bottom:10px;}
+  .svc-card p{font-size:.92rem;color:rgba(34,18,25,0.62);line-height:1.55;margin-bottom:16px;}
+  .svc-card .btn-line{font-size:.85rem;font-weight:600;}
+
+  /* ---------- CHALKBOARD SPECIALS (signature element) ---------- */
+  .chalk-wrap{
+    background:var(--ink);color:var(--cream);
+    border-radius:18px;padding:56px 48px;position:relative;overflow:hidden;
+  }
+  @media(max-width:640px){.chalk-wrap{padding:40px 22px;}}
+  .chalk-wrap::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(250,242,228,0.04) 1px, transparent 1px);
+    background-size:14px 14px;pointer-events:none;
+  }
+  .chalk-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:36px;flex-wrap:wrap;position:relative;}
+  .chalk-head .eyebrow{color:var(--gold);}
+  .chalk-head h2{color:var(--cream);}
+  .specials-list{position:relative;columns:2;column-gap:56px;}
+  @media(max-width:760px){.specials-list{columns:1;}}
+  .special-row{
+    display:flex;align-items:baseline;gap:10px;
+    padding:14px 0;border-bottom:1px dotted rgba(250,242,228,0.22);
+    break-inside:avoid;
+  }
+  .special-row .dish{font-family:'Fraunces',serif;font-style:italic;font-size:1.12rem;white-space:nowrap;}
+  .special-row .leader{flex:1;border-bottom:1px dotted rgba(250,242,228,0.3);transform:translateY(-4px);}
+  .special-row .price{font-family:'Space Mono',monospace;color:var(--gold);font-weight:700;font-size:.95rem;white-space:nowrap;}
+
+  /* ---------- STATS ---------- */
+  .stats{
+    background:var(--cream-2);
+    border-radius:18px;padding:52px 40px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center;
+  }
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr);}}
+  .stat .num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--paprika);font-weight:700;}
+  .stat .lbl{font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(34,18,25,0.6);margin-top:6px;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:900px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px;position:relative;}
+  .testi-card .quote-mark{font-family:'Fraunces',serif;font-size:3rem;color:var(--gold);line-height:.5;display:block;margin-bottom:18px;}
+  .testi-card p.body{font-size:.98rem;line-height:1.6;color:rgba(34,18,25,0.75);margin-bottom:22px;}
+  .testi-foot{display:flex;align-items:center;gap:12px;}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--paprika);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;}
+  .testi-foot .name{font-weight:700;font-size:.9rem;}
+  .stars{color:var(--gold-dark);font-size:.82rem;letter-spacing:2px;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;gap:14px;}
+  @media(max-width:760px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+  .gallery-tile{
+    border-radius:10px;display:flex;align-items:flex-end;padding:14px;
+    font-family:'Space Mono',monospace;font-size:.72rem;color:var(--cream);letter-spacing:.05em;
+    position:relative;overflow:hidden;
+  }
+  .gallery-tile span{position:relative;z-index:1;}
+  .gallery-tile.tall{grid-row:span 2;}
+  .g1{background:linear-gradient(155deg,#C8451F,#8C2A16);}
+  .g2{background:linear-gradient(155deg,#D9A441,#B9832A);}
+  .g3{background:linear-gradient(155deg,#33503F,#20332A);}
+  .g4{background:linear-gradient(155deg,#B5391F,#221219);}
+  .g5{background:linear-gradient(155deg,#E0722F,#B5391F);}
+  .g6{background:linear-gradient(155deg,#20332A,#33503F);}
+  .g7{background:linear-gradient(155deg,#B9832A,#D9A441);}
+  .g8{background:linear-gradient(155deg,#8C2A16,#221219);}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background:repeating-linear-gradient(45deg, var(--paprika), var(--paprika) 24px, var(--paprika-dark) 24px, var(--paprika-dark) 48px);
+    border-radius:18px;padding:64px 48px;text-align:center;color:var(--cream);
+  }
+  @media(max-width:640px){.cta-banner{padding:44px 22px;}}
+  .cta-banner h2{color:var(--cream);font-size:clamp(1.8rem,3.6vw,2.6rem);margin-bottom:16px;}
+  .cta-banner p{color:rgba(250,242,228,0.85);margin-bottom:30px;font-size:1.05rem;}
+  .cta-banner .btn-primary{background:var(--cream);color:var(--paprika-dark);}
+  .cta-banner .btn-primary:hover{background:#fff;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(250,242,228,0.75);padding:70px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr;}}
+  footer h4{color:var(--cream);font-size:.98rem;margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:700;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:.9rem;}
+  footer .foot-logo{display:flex;align-items:center;gap:10px;color:var(--cream);font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;margin-bottom:14px;}
+  footer p.tag{font-size:.88rem;line-height:1.6;max-width:32ch;}
+  .foot-bottom{border-top:1px solid rgba(250,242,228,0.12);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8rem;}
+  .foot-bottom a{opacity:.8;}
+  .foot-bottom a:hover{opacity:1;text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo"><span class="logo-mark">BK</span> Bike's Kitchen</div>
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Contact Us</a>
+      <a href="#book" class="btn btn-primary">Book Now</a>
+    </div>
+    <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Catering · Akure, Ondo State</span>
+      <h1>Delicious meals,<br><em>beautifully</em> served,<br>for every occasion.</h1>
+      <p class="lede">From owambe weddings to quiet burial ceremonies, corporate lunches to graduation banquets — Bike's Kitchen brings restaurant-grade food and full event catering to your table, on time, every time.</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn btn-primary">Book Your Event</a>
+        <a href="#menu" class="btn btn-ghost">View Menu</a>
+      </div>
+      <div class="hero-meta">
+        <div><span class="num">250+</span><span class="lbl">Events Catered</span></div>
+        <div><span class="num">15+</span><span class="lbl">Professional Chefs</span></div>
+        <div><span class="num">10+</span><span class="lbl">Years Experience</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="steam" viewBox="0 0 150 140"><path d="M40 130 C 20 100, 60 90, 40 60 C 20 30, 60 20, 45 0"/><path d="M75 130 C 55 100, 95 90, 75 60 C 55 30, 95 20, 80 0"/><path d="M110 130 C 90 100, 130 90, 110 60 C 90 30, 130 20, 115 0"/></svg>
+      <div class="plate"></div>
+      <div class="badge"><div class="badge-inner">FRESH · CATERED · CERTIFIED</div></div>
+      <div class="ticket">
+        <div class="t-head"><span>ORDER #0412</span><span>✓</span></div>
+        <div class="t-row"><span>Jollof Rice</span><span>×80</span></div>
+        <div class="t-row"><span>Small Chops</span><span>×200</span></div>
+        <div class="t-row"><span>Grilled Chicken</span><span>×80</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Weddings</span><span>Birthday Parties</span><span>Burial Ceremonies</span><span>Graduation Ceremonies</span><span>Naming Ceremonies</span><span>Corporate Events</span><span>Conferences</span><span>Religious Events</span><span>Outdoor Catering</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What we do</span>
+      <h2>Catering built around your occasion</h2>
+      <p>Every event has its own rhythm — we plan the menu, the portions, and the service style to match it.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4l6 6M20 4l-6 6M12 10v10M4 4c0 4 3 6 6 6M20 4c0 4-3 6-6 6"/></svg></div>
+        <h3>Wedding Catering</h3>
+        <p>Full-course wedding menus, small chops stations, and drinks packages for your big day.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v6M8 8h8l2 12H6L8 8z"/></svg></div>
+        <h3>Birthday Catering</h3>
+        <p>Bright, celebratory spreads and cake pairings sized for kids' parties or milestone birthdays.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 3l2.5 5 5.5.7-4 4 1 5.5-5-2.9-5 2.9 1-5.5-4-4 5.5-.7z"/></svg></div>
+        <h3>Burial Ceremonies</h3>
+        <p>Respectful, dependable service for wake-keeps and burial receptions, at any scale.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 4l9 4-9 4-9-4 9-4zM7 11v5c0 1.5 2.2 3 5 3s5-1.5 5-3v-5"/></svg></div>
+        <h3>Graduation Ceremonies</h3>
+        <p>Celebratory buffets and small chops platters to mark academic milestones.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Outdoor Catering</h3>
+        <p>On-site cooking and live stations for garden parties, picnics, and open-air events.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="1"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
+        <h3>Corporate Events</h3>
+        <p>Packed lunches, conference catering, and boardroom platters delivered on schedule.</p>
+        <a href="#" class="btn-line">Learn more →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="chalk-wrap">
+      <div class="chalk-head">
+        <div>
+          <span class="eyebrow">Today's specials</span>
+          <h2>Straight from the pot</h2>
+        </div>
+        <a href="#" class="btn btn-primary">See Full Menu</a>
+      </div>
+      <div class="specials-list">
+        <div class="special-row"><span class="dish">Jollof Rice</span><span class="leader"></span><span class="price">₦12,500</span></div>
+        <div class="special-row"><span class="dish">Fried Rice</span><span class="leader"></span><span class="price">₦17,500</span></div>
+        <div class="special-row"><span class="dish">Amala &amp; Ewedu</span><span class="leader"></span><span class="price">₦7,500</span></div>
+        <div class="special-row"><span class="dish">Pounded Yam</span><span class="leader"></span><span class="price">₦22,500</span></div>
+        <div class="special-row"><span class="dish">Egusi Soup</span><span class="leader"></span><span class="price">₦12,800</span></div>
+        <div class="special-row"><span class="dish">Ofada Rice &amp; Sauce</span><span class="leader"></span><span class="price">₦13,000</span></div>
+        <div class="special-row"><span class="dish">Small Chops (tray)</span><span class="leader"></span><span class="price">₦15,000</span></div>
+        <div class="special-row"><span class="dish">Grilled Chicken</span><span class="leader"></span><span class="price">₦33,500</span></div>
+        <div class="special-row"><span class="dish">Pepper Soup</span><span class="leader"></span><span class="price">₦12,200</span></div>
+        <div class="special-row"><span class="dish">Assorted Small Chops Platter</span><span class="leader"></span><span class="price">₦25,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stats" id="statsBlock">
+      <div class="stat"><span class="num" data-target="250">0</span><div class="lbl">Events Catered</div></div>
+      <div class="stat"><span class="num" data-target="1200">0</span><div class="lbl">Happy Customers</div></div>
+      <div class="stat"><span class="num" data-target="15">0</span><div class="lbl">Professional Chefs</div></div>
+      <div class="stat"><span class="num" data-target="10">0</span><div class="lbl">Years Experience</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Word on the street</span>
+      <h2>What our clients say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="quote-mark">“</span>
+        <p class="body">Bike's Kitchen handled our wedding for 400 guests without a single hiccup. The jollof rice was the talk of the reception.</p>
+        <div class="testi-foot">
+          <div class="avatar">T</div>
+          <div><div class="name">Toyin A.</div><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-mark">“</span>
+        <p class="body">Professional, punctual, and the small chops were still hot when they arrived. Booked them again for our office party.</p>
+        <div class="testi-foot">
+          <div class="avatar">E</div>
+          <div><div class="name">Emeka O.</div><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-mark">“</span>
+        <p class="body">They catered my father's burial with so much care and dignity. The food was excellent and the team was respectful throughout.</p>
+        <div class="testi-foot">
+          <div class="avatar">F</div>
+          <div><div class="name">Funmi B.</div><div class="stars">★★★★★</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Recent work</span>
+      <h2>From our kitchen to your event</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-tile tall g1"><span>Wedding · Akure</span></div>
+      <div class="gallery-tile g2"><span>Small Chops</span></div>
+      <div class="gallery-tile g3"><span>Corporate Lunch</span></div>
+      <div class="gallery-tile g4"><span>Owambe</span></div>
+      <div class="gallery-tile tall g5"><span>Grill Station</span></div>
+      <div class="gallery-tile g6"><span>Naming Ceremony</span></div>
+      <div class="gallery-tile g7"><span>Birthday</span></div>
+      <div class="gallery-tile g8"><span>Graduation</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap">
+    <div class="cta-banner">
+      <span class="eyebrow" style="color:var(--cream);">Ready when you are</span>
+      <h2>Let's cater your next event</h2>
+      <p>Tell us the date, the guest count, and the occasion — we'll take it from there.</p>
+      <a href="#contact" class="btn btn-primary">Book Your Event</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><span class="logo-mark">BK</span>Bike's Kitchen</div>
+        <p class="tag">Professional catering for weddings, ceremonies, and corporate events across Akure, Ondo State & Nigeria.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#services">Services</a></li><li><a href="#menu">Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#testimonials">Reviews</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">FAQs</a></li></ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>+234 803 627 7810</li>
+          <li>https://.bikeskitchen.com</li>
+          <li>Ijapo Estate Akure, Ondo State, Nigeria</li>
+          <li><a href="#">WhatsApp Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bike's Kitchen. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle -> simple show/hide of a slide-down panel
+  const toggle = document.querySelector('.menu-toggle');
+  const navlinks = document.querySelector('.navlinks');
+  toggle.addEventListener('click', () => {
+    const open = navlinks.classList.toggle('mobile-open');
+    if(open){
+      navlinks.style.display='flex';
+      navlinks.style.flexDirection='column';
+      navlinks.style.position='absolute';
+      navlinks.style.top='100%';
+      navlinks.style.left='0';
+      navlinks.style.right='0';
+      navlinks.style.background='var(--cream)';
+      navlinks.style.padding='20px 32px';
+      navlinks.style.gap='16px';
+      navlinks.style.borderBottom='1px solid var(--line)';
+    } else {
+      navlinks.style.display='none';
+    }
+  });
+
+  // marquee: duplicate content for seamless loop
+  const track = document.getElementById('marqueeTrack');
+  track.innerHTML += track.innerHTML;
+
+  // animated stat counters, triggered on scroll into view
+  const statEls = document.querySelectorAll('.stat .num');
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1200;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString() + (p >= 1 ? '+' : '');
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
